@@ -10,16 +10,20 @@ config();
 // Create HTTP Server
 const app = exp();
 //add cors
+import cors from "cors";
+
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://user-management-app-gilt-seven.vercel.app"
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
   })
 );
+app.options("*", cors());
 // Add body parser middleware
 app.use(exp.json());
 // Forward req to UserAPI if path starts with /user-api
