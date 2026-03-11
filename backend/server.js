@@ -16,6 +16,7 @@ app.use(
       "http://localhost:5173",
       "https://user-management-app-gilt-seven.vercel.app"
     ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
   })
 );
