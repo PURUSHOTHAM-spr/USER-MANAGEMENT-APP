@@ -8,25 +8,14 @@ config();
 
 const app = exp();
 
-// CORRECTED CORS CONFIGURATION
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Allows localhost and any Vercel deployment URL
-    if (!origin || origin.includes("localhost") || origin.endsWith("vercel.app")) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 200
-};
-
-// Apply CORS before any routes
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+// Standard CORS configuration (allow all origins)
+app.use(
+cors({
+origin: "*", // allow requests from all frontends
+methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+allowedHeaders: ["Content-Type", "Authorization"]
+})
+);
 
 app.use(exp.json());
 
